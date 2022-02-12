@@ -1,0 +1,18 @@
+body {
+  background-color: cadetblue;
+}
+
+.moon-image {
+  cursor: pointer;
+}
+
+.resource-table-display {
+  min-width: 90vh;
+  background-color: antiquewhite;
+  color: black;
+  flex-direction: column;
+}
+
+.button-column {
+  flex-direction: column;
+}
