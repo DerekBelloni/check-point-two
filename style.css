@@ -16,3 +16,7 @@ body {
 .button-column {
   flex-direction: column;
 }
+
+.button-table {
+  background-color: coral;
+}

@@ -35,7 +35,8 @@ function buyClickUpgradeOne() {
     userClickUpgrades.userClickUpgradeOne.quantity += 1
     genericResource -= userClickUpgrades.userClickUpgradeOne.price
     drawResourceTable()
-    increaseUpgradeOnePrice()
+    increaseClickOnePrice()
+    combineMultipliers()
   }
 }
 // [x] when clicking button to purchase upgrade, correct amount of resource is deducted
@@ -45,7 +46,8 @@ function buyClickUpgradeTwo() {
     click.quantity += 1
     genericResource -= click.price
     drawResourceTable()
-    increaseUpgradeTwoPrice()
+    increaseClickTwoPrice()
+    combineMultipliers()
   }
 }
 
@@ -55,6 +57,9 @@ function buyAutoUpgradeOne() {
     auto.quantity += 1
     genericResource -= auto.price
     drawResourceTable()
+    increaseAutoOnePrice()
+    combineMultipliers()
+    tallyAutoUpsPerSec()
   }
 }
 
@@ -64,6 +69,9 @@ function buyAutoUpgradeTwo() {
     auto.quantity += 1
     genericResource -= auto.price
     drawResourceTable()
+    increaseAutoTwoPrice()
+    combineMultipliers()
+    tallyAutoUpsPerSec()
   }
 }
 
@@ -95,22 +103,78 @@ function clickTwoMultiplier() {
   genericResource += (clickTwo.multiplier * clickTwo.quantity)
 }
 
-function increaseUpgradeOnePrice() {
+function increaseClickOnePrice() {
   let upOne = userClickUpgrades.userClickUpgradeOne
   console.log("upgrade price increase", upOne.price)
   if (upOne.quantity >= 1) {
-    upOne.price += (upOne.price * 2)
+    upOne.price += (upOne.quantity * 50)
   }
 
   drawUpgrades()
 }
 
-function increaseUpgradeTwoPrice() {
+function increaseClickTwoPrice() {
   let upTwo = userClickUpgrades.userClickUpgradeTwo
   if (upTwo.quantity >= 1) {
-    upTwo.price += (upTwo.price * 2)
+    upTwo.price += (upTwo.quantity * 100)
   }
   drawUpgrades()
+}
+
+function increaseAutoOnePrice() {
+  let autoOne = automaticUpgrades.autoUpgradeOne
+  if (autoOne.quantity >= 1) {
+    autoOne.price += (autoOne.quantity * 200)
+  }
+  drawUpgrades()
+}
+
+function increaseAutoTwoPrice() {
+  let autoTwo = automaticUpgrades.autoUpgradeTwo
+  if (autoTwo.quantity >= 1) {
+    autoTwo.price += (autoTwo.quantity * 400)
+  }
+  drawUpgrades()
+}
+
+function combineMultipliers() {
+  let clickOneTotalMultiplier = 0
+  let clickTwoTotalMultiplier = 0
+  let autoOneTotalMultiplier = 0
+  let autoTwoTotalMultiplier = 0
+  let clickMultiplierOne = userClickUpgrades.userClickUpgradeOne
+  let clickMultiplierTwo = userClickUpgrades.userClickUpgradeTwo
+  let autoOneMultiplier = automaticUpgrades.autoUpgradeOne
+  let autoTwoMultiplier = automaticUpgrades.autoUpgradeTwo
+  if (clickMultiplierOne.quantity >= 1) {
+    clickOneTotalMultiplier = (clickMultiplierOne.quantity * clickMultiplierOne.multiplier)
+  }
+  if (clickMultiplierTwo.quantity >= 1) {
+    clickTwoTotalMultiplier = (clickMultiplierTwo.quantity * clickMultiplierTwo.multiplier)
+  }
+  if (autoOneMultiplier.quantity >= 1) {
+    autoOneTotalMultiplier = (autoOneMultiplier.quantity * autoOneMultiplier.multiplier)
+  }
+  if (autoTwoMultiplier.quantity >= 1) {
+    autoTwoTotalMultiplier = (autoTwoMultiplier.quantity * autoTwoMultiplier.multiplier)
+  }
+  totalMultiplier = clickOneTotalMultiplier + clickTwoTotalMultiplier + autoOneTotalMultiplier + autoTwoTotalMultiplier
+  drawStats()
+}
+
+function tallyAutoUpsPerSec() {
+  let autoOneMultiplierPerSec = 0
+  let autoTwoMultiplierPerSec = 0
+  let autoOneMultiplier = automaticUpgrades.autoUpgradeOne
+  let autoTwoMultiplier = automaticUpgrades.autoUpgradeTwo
+  if (autoOneMultiplier.quantity >= 1) {
+    autoOneMultiplierPerSec = (autoOneMultiplier.quantity * 10) / 3
+  }
+  if (autoTwoMultiplier.quantity >= 1) {
+    autoTwoMultiplierPerSec = (autoTwoMultiplier.quantity * 20) / 3
+  }
+  resourcesPerSecond = autoOneMultiplierPerSec + autoTwoMultiplierPerSec
+  drawStats()
 }
 
 
@@ -159,10 +223,10 @@ function drawUpgrades() {
   <div>
     <h4>Upgrade Prices: </h4>
   </div>
-  <p><b>Upgrade One: ${userClickUpgrades.userClickUpgradeOne.price} </b></p>
-  <p><b>Upgrade Two: ${userClickUpgrades.userClickUpgradeTwo.price}</b></p>
-  <p><b>Upgrade Three: ${automaticUpgrades.autoUpgradeOne.price}</b></p>
-  <p><b>Upgrade Four: ${automaticUpgrades.autoUpgradeTwo.price}</b></p>
+  <p><b>Click Upgrade One: ${userClickUpgrades.userClickUpgradeOne.price} </b></p>
+  <p><b>Click Upgrade Two: ${userClickUpgrades.userClickUpgradeTwo.price}</b></p>
+  <p><b>Auto Upgrade One: ${automaticUpgrades.autoUpgradeOne.price}</b></p>
+  <p><b>Auto Upgrade Two: ${automaticUpgrades.autoUpgradeTwo.price}</b></p>
 </div>
   `
   document.getElementById("upgrade-prices").innerHTML = template
@@ -174,7 +238,7 @@ function drawStats() {
   <div id="stats-table" class="col-8 button-column">
         <h3>Stats:</h3>
         <p><b>Total Multiplier: ${totalMultiplier} </b></p>
-        <P><b>Resources Mined per Second: ${resourcesPerSecond}</b></P>
+        <P><b>Resources Mined per Second: ${resourcesPerSecond.toFixed(2)}</b></P>
       </div>
   `
   document.getElementById('stats-table').innerHTML = template
@@ -182,7 +246,7 @@ function drawStats() {
 }
 
 let autoIntervalOne = setInterval(applyAutoUpgradeOne, 3000)
-let autoIntervalTwo = setInterval(applyAutoUpgradeTwo, 1000)
+let autoIntervalTwo = setInterval(applyAutoUpgradeTwo, 3000)
 drawStats()
 drawUpgrades()
 drawResourceTable()

@@ -73,13 +73,13 @@
         <div>
           <h4>Upgrade Prices: </h4>
         </div>
-        <p><b>Upgrade One: </b></p>
-        <p><b>Upgrade Two: </b></p>
-        <p><b>Upgrade Three: </b></p>
-        <p><b>Upgrade Four: </b></p>
+        <p><b>Click Upgrade One: </b></p>
+        <p><b>Click Upgrade Two: </b></p>
+        <p><b>Auto Upgrade One: </b></p>
+        <p><b>Auto Upgrade Two: </b></p>
       </div>
       <!--End Template-------------->
-      <div class="col-6 p-2 button-column">
+      <div class="col-3 p-2 button-column button-table">
         <div>
           <button class="btn btn-danger mb-1 mt-1" onclick="buyClickUpgradeOne()">Click Upgrade One</button>
         </div>
@@ -93,17 +93,26 @@
           <button class="btn btn-info mb-1 mt-1" onclick="buyAutoUpgradeTwo()">Auto Upgrade Two</button>
         </div>
       </div>
-
     </div>
+
     <div class="row">
-      <!--Stats Table Template-->
-      <div id="stats-table" class="col-8 button-column">
+      <div id="modifier-table" class="col-6 p-2">
+        <div>
+          <h4>Upgrade Multipliers: </h4>
+        </div>
+        <p><b>Upgrade One: 2x Multiplier</b></p>
+        <p><b>Upgrade Two: 5x Multiplier</b></p>
+        <p><b>Upgrade Three: 10x Multiplier</b></p>
+        <p><b>Upgrade Four: 20x Multiplier</b></p>
+      </div>
+      <div id="stats-table" class="col-6 button-column p-2">
         <h3>Stats:</h3>
         <p><b>Total Multiplier: </b></p>
         <P><b>Resources Mined per Second: </b></P>
       </div>
-      <!--End Template--------->
     </div>
+
+
   </main>
 
 
