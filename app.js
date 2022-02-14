@@ -245,6 +245,8 @@ function drawStats() {
 
 }
 
+
+
 let autoIntervalOne = setInterval(applyAutoUpgradeOne, 3000)
 let autoIntervalTwo = setInterval(applyAutoUpgradeTwo, 3000)
 drawStats()
