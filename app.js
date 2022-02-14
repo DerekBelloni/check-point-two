@@ -1,4 +1,4 @@
-let genericResource = 50000
+let genericResource = 5000
 let totalMultiplier = 0
 let resourcesPerSecond = 0
 
@@ -197,7 +197,7 @@ function drawResourceTable() {
     <h3><b> Inventory</h3></b>
   </div>
   <div>
-    <p><b> Generic Resource: ${genericResource} </b></p>
+    <p><b> Generic Resource Total: ${genericResource} </b></p>
   </div>
   <div>
     <p><b> User Click Upgrade One: ${userClickUpgrades.userClickUpgradeOne.quantity} </b></p>

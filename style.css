@@ -1,5 +1,25 @@
 body {
-  background-color: cadetblue;
+  background-color: #262730;
+}
+
+.header-bg {
+  background-color: #c8e087;
+}
+
+.inventory-bg {
+  background-color: #95a472;
+}
+
+.upgrade-bg {
+  background-color: #ddfcad;
+}
+
+.upgrade-btn-bg {
+  background-color: #82846d;
+}
+
+.auto-btn-bg {
+  background-color: #003b36;
 }
 
 .moon-image {
@@ -7,8 +27,8 @@ body {
 }
 
 .resource-table-display {
-  min-width: 90vh;
-  background-color: antiquewhite;
+  /* min-width: 80vh; */
+  background-color: #95a472;
   color: black;
   flex-direction: column;
 }
@@ -17,6 +37,6 @@ body {
   flex-direction: column;
 }
 
-.button-table {
-  background-color: coral;
+.multiplier-bg {
+  background-color: #77ba99;
 }
